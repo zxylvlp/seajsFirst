@@ -21,7 +21,8 @@ module.exports = function(grunt) {
       options: {
         paths: ['dist/scripts'],
         alias: {
-          "jquery": "libs/jquery/jquery"
+          "jquery": "libs/jquery/jquery",
+          "jade": "libs/jquery/jade"
         }
       },
       application :  {
@@ -92,6 +93,20 @@ module.exports = function(grunt) {
         tasks: ['jshint']
       }
     },
+
+    jade: {
+        application: {
+            options: {
+                client: true,
+	        debug: false,
+            },
+            
+            files: {
+                'dist/scripts/template.js': ['assets/scripts/**/*.jade']
+            }
+        }
+       
+    },
         
   });
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -103,7 +118,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.registerTask('default', ['less', 'transport', 'concat', 'uglify',
-    , 'jshint', 'connect', 'watch'
+  grunt.registerTask('default', ['less', 'transport', 'concat', 'uglify','jade', 'jshint', 'connect', 'watch'
   ]);
 };
