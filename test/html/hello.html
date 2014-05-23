@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="../styles/libs/qunit.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="../scripts/libs/qunit.js"></script>
+	<script src="../../dist/scripts/libs/seajs/sea-debug.js" id="seajsnode"></script>
+	<script>
+
+			seajs.config({
+					base: "../../dist/scripts", // set base to seajs_test/static
+			})
+
+			seajs.use("../scripts/test-hello-debug");// it's a top-level identifier
+
+	</script>
+</body>
+</html>
