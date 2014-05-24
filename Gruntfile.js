@@ -16,13 +16,36 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    jade: {
+        options: {
+            client: true,
+            debug: false,
+            processName: function(filename) {
+              return filename.slice("assets/templates/".length,-5);
+            },
+            namespace: 'jadetpl'
+        },
+        application: {
+            files: {
+                'dist/scripts/jadetpl.js': ['assets/templates/**/*.jade']
+            }
+
+        },
+        debug: {
+            files: {
+                'dist/scripts/jadetpl-debug.js': ['assets/templates/**/*.jade']
+            }
+        }
+
+    },
               
     transport :  {
       options: {
         paths: ['dist/scripts'],
         alias: {
           "jquery": "libs/jquery/jquery",
-          "jade": "libs/jquery/jade"
+          "jade": "libs/jade/jade"
         }
       },
       application :  {
@@ -57,7 +80,8 @@ module.exports = function(grunt) {
     uglify :  {               
       application :  {                    
         files :  {                       
-          'dist/scripts/application.js' :  ['dist/scripts/application.js']                    
+          'dist/scripts/application.js' :  ['dist/scripts/application.js'],
+          'dist/scripts/jadetpl.js' :  ['dist/scripts/jadetpl.js'],
         }               
       }          
     },
@@ -94,19 +118,7 @@ module.exports = function(grunt) {
       }
     },
 
-    jade: {
-        application: {
-            options: {
-                client: true,
-	        debug: false,
-            },
-            
-            files: {
-                'dist/scripts/template.js': ['assets/scripts/**/*.jade']
-            }
-        }
-       
-    },
+
         
   });
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -118,6 +130,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.registerTask('default', ['less', 'transport', 'concat', 'uglify','jade', 'jshint', 'connect', 'watch'
+  grunt.registerTask('default', ['less','jade', 'transport', 'concat', 'uglify', 'jshint', 'connect', 'watch'
   ]);
 };

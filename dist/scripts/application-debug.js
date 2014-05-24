@@ -1,7 +1,9 @@
-define("application-debug", [ "./util-debug", "libs/jquery/jquery-debug" ], function(require, exports, module) {
+define("application-debug", [ "./util-debug", "libs/jquery/jquery-debug", "libs/jade/jade-debug", "jadetpl-debug" ], function(require, exports, module) {
     var util = require("./util-debug");
     require("libs/jquery/jquery-debug");
-    $("h1").html("asdfasdfasdf");
+    require("libs/jade/jade-debug");
+    require("jadetpl-debug");
+    $("h1").html(jadetpl.test);
     var helloSeaJs = document.getElementById("hello-seajs");
     helloSeaJs.style.color = util.randomColor();
     window.setInterval(function() {
